@@ -13,6 +13,18 @@ const empty = {
 const cells = [];
 cells.push(empty);
 
+const numbers = range(1, 15, 1);
+
+console.log(numbers.sort(() => Math.random() - 0.5));
+
+const numbers1 = [...Array(15).keys()]
+    .map(x => x + 1)
+    .sort(() => Math.random() - 0.5);
+
+console.log(numbers1);
+
+const numbers2 = Array.from()
+
 const move = index => {
     const cell = cells[index];
     const leftDiff = Math.abs(empty.left - cell.left);
@@ -20,7 +32,7 @@ const move = index => {
 
     if (leftDiff + topDiff > 1) return;
 
-    
+
     cell.element.style.top = `${empty.top * cellSize}px`;
     cell.element.style.left = `${empty.left * cellSize}px`;
 
