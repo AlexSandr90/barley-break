@@ -28,6 +28,8 @@ h1 {
     box-sizing: border-box;
     position: absolute;
     font-size: 40px;
+    transition: all .3s;
+    cursor: pointer;
 
     display: flex;
     justify-content: center;
