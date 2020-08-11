@@ -1,5 +1,5 @@
 const field = document.getElementById('field');
-const cellSize = 100;
+const cellSide = 100;
 
 const empty = {
     top: 0,
@@ -10,11 +10,13 @@ const empty = {
 const numbers = [...Array(15).keys()]
     .sort(() => Math.random() - 0.5);
 
-console.log(numbers);
-
 const cells = [];
 cells.push(empty);
-console.log(cells);
+
+const victory = cells.every(cell => {
+    return cell.value === cell.top * 4 + cell.left;
+});
+console.log(victory);
 
 const move = index => {
     const cell = cells[index];
@@ -22,12 +24,10 @@ const move = index => {
     const leftDiff = Math.abs(empty.left - cell.left);
     const topDiff = Math.abs(empty.top - cell.top);
 
-
     if (leftDiff + topDiff > 1) return;
 
-
-    cell.element.style.top = `${empty.top * cellSize}px`;
-    cell.element.style.left = `${empty.left * cellSize}px`;
+    cell.element.style.top = `${empty.top * cellSide}px`;
+    cell.element.style.left = `${empty.left * cellSide}px`;
 
     const emptyLeft = empty.left;
     const emptyTop = empty.top;
@@ -39,18 +39,20 @@ const move = index => {
     cell.top = emptyTop;
 
 
-    const isVictory = cells.every(cell => {
-        return cell.value === cell.top * 4 + cell.left;
-    });
+    // const victory = cells.every(cell => {
+    //     return cell.value === cell.top * 4 + cell.left;
+    // });
 
-    if (isVictory) alert('you von');
+
+
+    if (victory) alert('you von');
 };
-console.log(cells);
 
 
 for (let i = 1; i <= 15; i++) {
     const cell = document.createElement('div');
-    const value = numbers[i - 1] + 1;
+    // const value = numbers[i - 1] + 1;
+    const value = i;
     cell.className = 'cell';
     cell.innerHTML = value;
 
@@ -64,10 +66,8 @@ for (let i = 1; i <= 15; i++) {
         element: cell,
     });
 
-
-
-    cell.style.top = `${top * cellSize}px`;
-    cell.style.left = `${left * cellSize}px`;
+    cell.style.top = `${top * cellSide}px`;
+    cell.style.left = `${left * cellSide}px`;
 
 
     field.append(cell);
