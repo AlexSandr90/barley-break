@@ -4,34 +4,56 @@
 }
 
 .wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     width: 100%;
+    height: 100vh;
+    font-family: 'Open Sans', sans-serif;
+
+    background-color: #fff9a4;
 }
 
 h1 {
     text-align: center;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: 36px;
+    font-weight: 400;
+    color: #C21F39;
 }
 
 .field {
     width: 400px;
     height: 400px;
-    border: 2px solid #004444;
-    border-radius: 5px;
-    margin: 0 auto;
+    border: 1px solid #004444;
     position: relative;
+    background-color: #000000;
 }
 
 .cell {
     width: 100px;
     height: 100px;
-    border: 2px solid #C21F39;
-    border-radius: 5px;
+    border: 1px solid #004444;
     box-sizing: border-box;
     position: absolute;
     font-size: 40px;
     transition: all .3s;
     cursor: pointer;
 
+    background-color: #fff;
+    color: #C21F39;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.cell:hover {
+    background-color: #b3c2ff;
+}
+
+.cell:active {
+    background-color: #9d9eff;
 }

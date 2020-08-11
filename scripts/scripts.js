@@ -8,7 +8,7 @@ const emptyCell = {
     value: 0,
 };
 
-const numbers = [...Array(15).keys()]
+const randomCellNumbers = [...Array(15).keys()]
     .sort(() => Math.random() - 0.5);
 
 const cells = [];
@@ -26,40 +26,39 @@ const move = index => {
 
     if (leftDiff + topDiff > 1) return;
 
-    cell.element.style.top = `${emptyCell.top * cellSide}px`;
-    cell.element.style.left = `${emptyCell.left * cellSide}px`;
+    cell.fieldElement.style.top = `${emptyCell.top * cellSide}px`;
+    cell.fieldElement.style.left = `${emptyCell.left * cellSide}px`;
 
-    const emptyLeft = emptyCell.left;
-    const emptyTop = emptyCell.top;
+    const temporaryLeft = emptyCell.left;
+    const temporaryTop = emptyCell.top;
 
     emptyCell.left = cell.left;
     emptyCell.top = cell.top;
 
-    cell.left = emptyLeft;
-    cell.top = emptyTop;
+    cell.left = temporaryLeft;
+    cell.top = temporaryTop;
 
     if (victory()) alert('you win!');
 };
 
-
 for (let i = 1; i <= 15; i++) {
     const cell = document.createElement('div');
-    const value = numbers[i - 1] + 1;
+    const cellValue = randomCellNumbers[i - 1] + 1;
     cell.className = 'cell';
-    cell.innerHTML = value;
+    cell.innerText = cellValue;
 
-    const left = i % 4;
-    const top = (i - left) / 4;
+    const cellLeft = i % 4;
+    const cellTop = (i - cellLeft) / 4;
 
     cells.push({
-        top: top,
-        left: left,
-        value: value,
-        element: cell,
+        top: cellTop,
+        left: cellLeft,
+        value: cellValue,
+        fieldElement: cell,
     });
 
-    cell.style.top = `${top * cellSide}px`;
-    cell.style.left = `${left * cellSide}px`;
+    cell.style.top = `${cellTop * cellSide}px`;
+    cell.style.left = `${cellLeft * cellSide}px`;
 
     field.append(cell);
 
