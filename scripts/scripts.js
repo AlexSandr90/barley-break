@@ -1,7 +1,8 @@
 const field = document.getElementById('field');
+
 const cellSide = 100;
 
-const empty = {
+const emptyCell = {
     top: 0,
     left: 0,
     value: 0,
@@ -11,48 +12,39 @@ const numbers = [...Array(15).keys()]
     .sort(() => Math.random() - 0.5);
 
 const cells = [];
-cells.push(empty);
+cells.push(emptyCell);
 
-const victory = cells.every(cell => {
+const victory = () => cells.every(cell => {
     return cell.value === cell.top * 4 + cell.left;
 });
-console.log(victory);
 
 const move = index => {
     const cell = cells[index];
 
-    const leftDiff = Math.abs(empty.left - cell.left);
-    const topDiff = Math.abs(empty.top - cell.top);
+    const leftDiff = Math.abs(emptyCell.left - cell.left);
+    const topDiff = Math.abs(emptyCell.top - cell.top);
 
     if (leftDiff + topDiff > 1) return;
 
-    cell.element.style.top = `${empty.top * cellSide}px`;
-    cell.element.style.left = `${empty.left * cellSide}px`;
+    cell.element.style.top = `${emptyCell.top * cellSide}px`;
+    cell.element.style.left = `${emptyCell.left * cellSide}px`;
 
-    const emptyLeft = empty.left;
-    const emptyTop = empty.top;
+    const emptyLeft = emptyCell.left;
+    const emptyTop = emptyCell.top;
 
-    empty.left = cell.left;
-    empty.top = cell.top;
+    emptyCell.left = cell.left;
+    emptyCell.top = cell.top;
 
     cell.left = emptyLeft;
     cell.top = emptyTop;
 
-
-    // const victory = cells.every(cell => {
-    //     return cell.value === cell.top * 4 + cell.left;
-    // });
-
-
-
-    if (victory) alert('you von');
+    if (victory()) alert('you win!');
 };
 
 
 for (let i = 1; i <= 15; i++) {
     const cell = document.createElement('div');
-    // const value = numbers[i - 1] + 1;
-    const value = i;
+    const value = numbers[i - 1] + 1;
     cell.className = 'cell';
     cell.innerHTML = value;
 
@@ -68,7 +60,6 @@ for (let i = 1; i <= 15; i++) {
 
     cell.style.top = `${top * cellSide}px`;
     cell.style.left = `${left * cellSide}px`;
-
 
     field.append(cell);
 
